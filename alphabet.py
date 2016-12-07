@@ -3,6 +3,7 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
 from keras.utils import np_utils
+import rnn
 
 # fix random seed for reproducibility
 np.random.seed(42)
@@ -35,5 +36,12 @@ X = np.reshape(dataX, (len(dataX), seq_length, 1))
 X = X / float(len(alphabet))
 # one hot encode the output variable
 y = np_utils.to_categorical(dataY)
-print(X)
+print(dataX)
 print(y)
+
+vocabulary_size = len(char_to_int)
+
+model = rnn.RNN(vocabulary_size)
+o, s = model.forward(X[10])
+print(o.shape)
+print(o)
